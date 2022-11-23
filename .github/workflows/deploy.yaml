@@ -1,0 +1,54 @@
+name: build test and deploy
+
+on:
+  push:
+    branches: [ master__ ]
+  pull_request:
+    branches: [ master__ ]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    #   strategy:
+    #    matrix:
+    #     node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      #      - uses: actions/checkout@v2
+      #      - name: Use Node.js ${{ matrix.node-version }}
+      #        uses: actions/setup-node@v2
+      #        with:
+      #          node-version: ${{ matrix.node-version }}
+      #      - name: Install dependencies
+      #        run: yarn
+      #      - run: yarn run build
+      #      - run: yarn run test
+      - name: Deploy to linode server
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
+          #          key: ${{secrets.SSH_KEY}} # Private or public key of the server
+          username: ${{secrets.SSH_USERNAME}} # User of the server you want to ssh into
+          password: ${{secrets.SSH_PASSWORD}}
+          #command_timeout : 30m
+#          yarn
+#          kill -9 $(lsof -t -i:7898)
+#          yarn start && npx wait-on tcp:7898
+#          echo 'run on port 7898'
+#          echo 'sucess run on linode server'
+
+          script: |
+            cd /root/vb
+            rm -rf vaillants-batisseurs-plus
+            git clone git@github.com:AssekoudaSamtou/vaillants-batisseurs-plus.git
+            echo 'Deployment successful to serveur test linode server'
+            cd /root/vb/vaillants-batisseurs-plus
+            yarn
+            yarn rimraf dist
+            yarn build
+            pm2 restart ../ecosystem.config.js --env production
+            npx wait-on tcp:7898
+            echo 'run on port 7898'
+            echo 'sucess run on linode server'
