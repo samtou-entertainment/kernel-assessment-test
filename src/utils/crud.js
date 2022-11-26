@@ -12,7 +12,7 @@ export const getOne = model => async (req, res) => {
     res.status(200).json({ data: doc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(400).end(e)
   }
 }
 
@@ -26,7 +26,7 @@ export const getMany = model => async (req, res) => {
     res.status(200).json({ data: docs })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(400).end(e)
   }
 }
 
@@ -36,7 +36,7 @@ export const createOne = model => async (req, res) => {
     res.status(201).json({ data: doc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(400).end(e)
   }
 }
 
@@ -60,7 +60,7 @@ export const updateOne = model => async (req, res) => {
     res.status(200).json({ data: updatedDoc })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(400).end(e)
   }
 }
 
@@ -77,7 +77,7 @@ export const removeOne = model => async (req, res) => {
     return res.status(200).json({ data: removed })
   } catch (e) {
     console.error(e)
-    res.status(400).end()
+    res.status(400).end(e)
   }
 }
 

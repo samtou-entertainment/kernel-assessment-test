@@ -10,6 +10,10 @@ router
     .post(controllers.createOne)
 
 router
+    .route('/delete')
+    .delete(controllers.removeMany)
+
+router
     .route('/:id')
     .get(controllers.getOne)
     .put(controllers.updateOne)
