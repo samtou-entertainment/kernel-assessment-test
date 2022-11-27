@@ -1,8 +1,11 @@
-# VAILLANTS BATISSEURS NODE API
-> description
+# Contact App (API)
 
-- [Installation](#excercises)
-  - [Hello world Express](#hello-world-express)
+## Project setup
+```
+docker compose up
+```
 
-## Excercises
-* [Slides](https://example.com)
+### Check out
+```
+http://localhost:7898/api/contacts
+```
