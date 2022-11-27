@@ -9,6 +9,7 @@ services:
         environment:
             - SERVER_PORT=7898
             - CONNECTIONSTRING=mongodb://mongo:27017/register
+#            - CONNECTIONSTRING=mongodb+srv://m001-student:<password>@sandbox.87ehg.mongodb.net/register/?retryWrites=true&w=majority
         volumes:
             - ./:/app
         command: yarn dev
